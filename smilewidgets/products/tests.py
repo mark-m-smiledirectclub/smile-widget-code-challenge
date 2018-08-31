@@ -51,7 +51,6 @@ class TestGetPriceAPI(ProductBaseTestCase):
     def test_get_product_price_with_related_product_price(self):
         """Given a valid date and product code, return the products corresponding price when a product price exists"""
         expected_data = {'price': self.future_cool_price_product.price}
-
         url = '/api/get_price/?productCode={}&date=2050-05-28'.format(self.cool_product.code)
 
         response = self.client.get(url)
@@ -63,7 +62,6 @@ class TestGetPriceAPI(ProductBaseTestCase):
         """Given a valid date, product code, and gift card return the products corresponding price"""
         expected_price = self.crappy_product.price - self.two_hundred_off.amount
         expected_data = {'price': expected_price}
-
         url = '/api/get_price/?productCode={}&date=2017-05-28&giftCardCode={}'.format(
             self.crappy_product.code, self.two_hundred_off.code
         )
@@ -76,7 +74,6 @@ class TestGetPriceAPI(ProductBaseTestCase):
     def test_get_product_price_when_no_product_exists(self):
         """Given a invalid product code return 404 error"""
         expected_data = {'price': NO_PRODUCT_FOUND_MSG}
-
         url = '/api/get_price/?productCode={}&date=2017-05-28'.format(
             'THISCODEDOESNTEXIST'
         )

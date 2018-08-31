@@ -2,6 +2,20 @@
 
 The Smile Widget Company currently sells two types of smile widgets: a Big Widget and a Small Widget.  We'd like to add more flexibility to our product pricing.
 
+# Note
+
+Hey there SmileDirectClub engineer(s),
+
+Opened a PR here for your review. A few comments:
+
+- I created a `ProductPrice` model as requested. It's basically a model that denotes what a product's price is during some given time period. I was going to nuke `Product.price` and create a `ProductPrice` for the given `Product` fixtures, but after thinking about it, I decided that it's best to leave `Product.price` alone and have that denote a standard baseline price. Basically, if there is no `ProductPrice` for a given date `Product.price` becomes our fallback.
+
+- This is fairly rough and I admit that it could use some polishing. For example, my PR leaves everything in cents and should be refactored to present our amounts in dollars/cents.
+
+- Running tests can be done via `docker-compose run --rm web ./smilewidgets/manage.py test products` (I assume ya'll already know this but for documentation's sake)
+
+Hope this covers it. Thanks for reviewing.
+
 ## Setup with Docker
 1. Install Docker (https://docs.docker.com/install/)
 2. Fork this repository.
